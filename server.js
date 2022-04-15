@@ -4,6 +4,8 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const { animals } = require('./data/animals');
 
+//testing url for development only: https://peaceful-forest-08175.herokuapp.com/api/animals
+
 //take in req.query and filter through the animals accordingly, returning the new filtered array
 function filterByQuery (query, animalsArray) {
     let personalityTraitsArray = [];
@@ -43,6 +45,11 @@ function filterByQuery (query, animalsArray) {
     return filteredResults;
 }
 
+function findById(id, animalsArray) {
+    const result = animalsArray.filter(animal => animal.id === id)[0];
+    return result;
+}
+
 app.get('/api/animals', (req, res) => {
     let results = animals;
 
@@ -51,6 +58,18 @@ app.get('/api/animals', (req, res) => {
     }
     
     res.json(results);
+})
+
+app.get('/api/animals/:id', (req, res) => {
+    const result = findById(req.params.id, animals);
+
+    if (result) {
+        res.json(result);
+    }
+    else {
+        //returns not found to end user if search does not exist
+        res.send(404);
+    }
 })
 
 app.listen(PORT, () => {
