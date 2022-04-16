@@ -1,0 +1,25 @@
+{
+  "name": "zoo-keeper",
+  "version": "1.0.0",
+  "description": "Module 11",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jared-ruiz/Zoo-Keeper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jared-ruiz/Zoo-Keeper/issues"
+  },
+  "homepage": "https://github.com/jared-ruiz/Zoo-Keeper#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "jest": "^27.5.1"
+  }
+}
