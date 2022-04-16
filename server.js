@@ -11,6 +11,9 @@ app.use(express.urlencoded({ extended: true }));
 //parse incoming JSON data
 app.use(express.json());
 
+//makes all files in public path static files usable during live server
+app.use(express.static('public'));
+
 const { animals } = require('./data/animals');
 
 //testing url for development only: https://peaceful-forest-08175.herokuapp.com/api/animals
@@ -129,6 +132,24 @@ app.post('/api/animals', (req, res) => {
         const animal = createNewAnimal(req.body, animals);
         res.json(animal);
     }
+})
+
+//route to home page in our root directory
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+})
+
+app.get('/animals', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+})
+
+app.get('/zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+})
+
+//wild card route that runs when the previous routes are not matched. This route should be last
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
 })
 
 app.listen(PORT, () => {
